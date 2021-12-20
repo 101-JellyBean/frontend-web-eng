@@ -15,10 +15,13 @@
             userCount: 10,
             metaScore: 88,
         },
+        actors: [],
         languages: ["English","French"],
-        actors: ["Emilia Clarke"],
+        
         imdb_url: "https://imdb.com/"
     }
+
+    let actors = ["Chris Evans"];
 
     let getLanguages;
     let getActors;
@@ -26,6 +29,10 @@
     async function addMovie() {
         getLanguages();
         getActors();
+        newMovie.actors = [];
+        actors.forEach((actorName) => {
+            newMovie.actors.push({name:actorName});
+        });
         fetch("http://localhost:3002/movies", {
             method: "POST",
             headers:{
@@ -133,7 +140,7 @@
             </div>
         </div> 
         <MultipleInput title="Languages" bind:data={newMovie.languages} bind:getData={getLanguages}/>
-        <MultipleInput title="Actors" bind:data={newMovie.actors} bind:getData={getActors}/>
+        <MultipleInput title="Actors" bind:data={actors} bind:getData={getActors}/>
         <div class="form-group row">
             <div class="col">
             <button name="submit" type="submit" class="btn btn-primary">Add</button>
